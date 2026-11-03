@@ -1,0 +1,64 @@
+create table tbl_dept(
+dept_code char(2) not null,
+dept_name varchar(14),
+dept_offr varchar(14),
+PRIMARY KEY(dept_code));
+select * from tbl_dept;
+drop table tbl_dept;
+
+insert into tbl_dept values
+('10','영업부','김영업'),
+('20','총무부','이총무'),
+('30','구매부','박구매'),
+('40','개발부','조개발');
+
+create table tbl_car(
+car_no char(10) not null,
+car_model varchar(14),
+car_company varchar(10),
+car_date char(8),
+primary key (car_no));
+
+insert into tbl_car values
+('10가0001','소나타','현대','20230101'),
+('10가0002','K5','기아','20230102'),
+('10가0003','SM5','삼성','20230103'),
+('10가0004','그랜저','현대','20230104'),
+('10가0005','k5','기아','20230105');
+
+CREATE TABLE TBL_DRIVE(
+DRV_DATE CHAR(8) NOT NULL,
+CAR_NO CHAR(10) NOT NULL,
+DRV_START INTEGER,
+DRV_END INTEGER,
+DEPT_CODE CHAR(2),
+DRV_MONEY INTEGER,
+PRIMARY KEY(DRV_DATE,CAR_NO));
+
+INSERT INTO TBL_DRIVE VALUES
+('20230302','10가0001',10100,10300,'10',25000),
+('20230302','10가0002',10150,10300,'10',20000),
+('20230302','10가0003',10200,10400,'20',35000),
+('20230302','10가0004',10250,10500,'20',40000),
+('20230302','10가0005',10300,10600,'30',50000);
+
+INSERT INTO TBL_DRIVE VALUES
+('20230301','10가0001',10000,10100,'10',20000),
+('20230301','10가0002',10000,10150,'10',30000),
+('20230301','10가0003',10000,10200,'20',30000),
+('20230301','10가0004',10000,10250,'30',40000),
+('20230301','10가0005',10000,10300,'40',40000);
+
+select *
+from tbl_car;
+
+SELECT drv_date, td.car_no, drv_start ds, drv_end de, td.dept_code, drv_money
+FROM TBL_DRIVE TD LEFT OUTER JOIN TBL_CAR tc ON TD.CAR_NO= tc.CAR_NO
+LEFT OUTER JOIN TBL_DEPT TP ON TP.DEPT_CODE= TD.DEPT_CODE;
+-- 부서코드 / 부서명 / 총운행거리 / 총 주유금액
+
+select td.dept_code, td.dept_name, sum
+from tbl_dept td right outer join tbl_brive tv on td.dept_code = tv.dept_code
+group by td.dept_code,td.dept_name;
+
+delete from tbl_drive where drv_date="20260102"
