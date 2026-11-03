@@ -77,12 +77,13 @@ try{
 	%>
 	
 <tr>
+<tr>
 <td><%=date%></td>
-<td><%=rs.getString("td.car_no") %></td>
-<td><%=rs.getString("tc.car_model") %></td>
+<td><%=rs.getString(2) %></td>
+<td><%=rs.getString(3) %></td>
 <td><%=drvStart %></td>
 <td><%=drvEnd%></td>
-<td><%=rs.getString("tp.dept_name") %></td>
+<td><%=rs.getString(6) %></td>
 <td><%=drvMoney%></td>
 </tr>
 <%
